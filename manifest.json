@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Ad Monitor Extension",
+    "version": "1.0",
+    "permissions": [
+      "activeTab",
+      "notifications",
+      "alarms"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["*://*.producthunt.com//*"],
+        "js": ["content.js"]
+      }
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "48": "icon.png"
+    }
+}
