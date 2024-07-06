@@ -33,7 +33,7 @@ This Chrome extension automatically increments the budget for Twitter ad campaig
 
 ## Authors
 
-- **[Abdel-Moneim Ibrahim](https://www.linkedin.com/in/abdel-moniem-ibrahim/)**: (Add your name and contributions here)
+- **[Abdel-Moneim Ibrahim](https://www.linkedin.com/in/abdel-moniem-ibrahim/)**: Developed and maintained this extension
 
 ## Sponsor
 
