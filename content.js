@@ -19,6 +19,11 @@ function checkForExhausted() {
     });
 }
 
+// Function to remove the compaign ID after saving
+function removeCampaignId() {
+    getElementByXPath("/html/body/div[2]/div/div[1]/div/div[1]/div/div[2]/div[1]/span[2]/button/span").click();
+}
+
 // Function to check for the form and update the budget
 function checkForForm(maxBudget, maxDailySpend, dailySpend, dryRun) {
     const check = {
@@ -51,7 +56,7 @@ function checkForForm(maxBudget, maxDailySpend, dailySpend, dryRun) {
                 buttons.forEach(button => {
                     const span = button.querySelector('span.Button-label');
                     if (span && span.innerText === 'Save') {
-                        //button.click();
+                        button.click();
                     }
                 });
             }
