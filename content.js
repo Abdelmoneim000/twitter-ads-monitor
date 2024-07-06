@@ -78,6 +78,7 @@ chrome.storage.sync.get(null, function(data) {
                 if (mutation.type === 'childList' || mutation.type === 'subtree') {
                     checkForExhausted();
                     checkForForm(maxBudget, maxDailySpend, dailySpend, dryRun);
+                    removeCampaignId();
                 }
             });
         });
@@ -91,6 +92,7 @@ chrome.storage.sync.get(null, function(data) {
         // Initial check in case the word "Exhausted" is already present
         checkForExhausted();
         checkForForm(maxBudget, maxDailySpend, dailySpend, dryRun);
+        removeCampaignId();
 
     } else {
         chrome.storage.sync.set({ dailySpend: 0 });
