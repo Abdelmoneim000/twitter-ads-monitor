@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter Ads Budget Incrementer</title>
+  <style>
+    body { width: 300px; padding: 10px; }
+    input, button { margin: 5px 0; width: 100%; }
+  </style>
+</head>
+<body>
+  <h2>Twitter Ads Budget Incrementer</h2>
+  <p>Status: <span id="status">Inactive</span></p>
+  <button id="toggleButton">Start Monitoring</button>
+  <h3>Configuration</h3>
+  <label for="maxBudget">Max Budget Per Campaign ($):</label>
+  <input type="number" id="maxBudget" min="0" step="0.01">
+  <label for="maxDailySpend">Max Daily Spend ($):</label>
+  <input type="number" id="maxDailySpend" min="0" step="0.01">
+  <label for="dryRun">
+    <input type="checkbox" id="dryRun" checked> Dry Run Mode
+  </label>
+  <button id="saveConfig">Save Configuration</button>
+
+  <script>
+    document.getElementById('saveConfig').addEventListener('click', () => {
+      const maxBudget = document.getElementById('maxBudget').value;
+      const maxDailySpend = document.getElementById('maxDailySpend').value;
+      const dryRun = document.getElementById('dryRun').checked;
+
+      chrome.storage.sync.set({
+        maxBudget: parseFloat(maxBudget),
+        maxDailySpend: parseFloat(maxDailySpend),
+        dryRun: dryRun
+      }, () => {
+        alert('Configuration saved!');
+      });
+    });
+
+    document.getElementById('toggleButton').addEventListener('click', () => {
+      const statusElement = document.getElementById('status');
+      const currentStatus = statusElement.innerText;
+
+      const newStatus = currentStatus === 'Inactive' ? 'Active' : 'Inactive';
+      statusElement.innerText = newStatus;
+
+      chrome.storage.sync.set({ monitoringStatus: newStatus });
+    });
+  </script>
+</body>
+</html>

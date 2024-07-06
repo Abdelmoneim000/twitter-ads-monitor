@@ -2,7 +2,9 @@
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "incrementBids") {
-        incrementBids();
+        console.log("hello")
+    } else if (request.action === "watchForFormPage") {
+        console.log("watchForFormPage message received");
     }
 });
 
@@ -11,3 +13,5 @@ function incrementBids() {
     // This will depend on the structure of your ad dashboard
     console.log("Incrementing bids by $0.01");
 }
+
+// background.js

@@ -5,14 +5,24 @@
     "permissions": [
       "activeTab",
       "notifications",
-      "alarms"
+      "alarms",
+      "storage",
+      "scripting"
     ],
     "content_scripts": [
       {
-        "matches": ["*://*.producthunt.com//*"],
+        "matches": ["https://ads.x.com/*"],
         "js": ["content.js"]
       }
     ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+          "16": "icon.png",
+          "48": "icon.png",
+          "128": "icon.png"
+      }
+    },
     "background": {
       "service_worker": "background.js"
     },
