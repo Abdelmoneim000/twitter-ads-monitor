@@ -3,13 +3,79 @@
 <head>
   <title>Twitter Ads Budget Incrementer</title>
   <style>
-    body { width: 300px; padding: 10px; }
-    input, button { margin: 5px 0; width: 100%; }
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      font-size: 20px;
+      color: #333;
+      text-align: center;
+    }
+    p {
+      margin-bottom: 10px;
+      color: #666;
+    }
+    .status {
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: #eee;
+      border-radius: 4px;
+      color: #666;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    h3 {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #333;
+    }
+    input[type="number"], input[type="checkbox"] {
+      width: calc(100% - 22px);
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="checkbox"] {
+      width: auto;
+    }
+    #saveConfig {
+      background-color: #008CBA;
+    }
+    #saveConfig:hover {
+      background-color: #0077A3;
+    }
   </style>
 </head>
 <body>
   <h2>Twitter Ads Budget Incrementer</h2>
-  <p>Status: <span id="status">Inactive</span></p>
+  <p>Status: <span id="status" class="status">Inactive</span></p>
   <button id="toggleButton">Start Monitoring</button>
   <h3>Configuration</h3>
   <label for="maxBudget">Max Budget Per Campaign ($):</label>
@@ -21,30 +87,6 @@
   </label>
   <button id="saveConfig">Save Configuration</button>
 
-  <script>
-    document.getElementById('saveConfig').addEventListener('click', () => {
-      const maxBudget = document.getElementById('maxBudget').value;
-      const maxDailySpend = document.getElementById('maxDailySpend').value;
-      const dryRun = document.getElementById('dryRun').checked;
-
-      chrome.storage.sync.set({
-        maxBudget: parseFloat(maxBudget),
-        maxDailySpend: parseFloat(maxDailySpend),
-        dryRun: dryRun
-      }, () => {
-        alert('Configuration saved!');
-      });
-    });
-
-    document.getElementById('toggleButton').addEventListener('click', () => {
-      const statusElement = document.getElementById('status');
-      const currentStatus = statusElement.innerText;
-
-      const newStatus = currentStatus === 'Inactive' ? 'Active' : 'Inactive';
-      statusElement.innerText = newStatus;
-
-      chrome.storage.sync.set({ monitoringStatus: newStatus });
-    });
-  </script>
+  <script src="popup.js"></script>
 </body>
 </html>
