@@ -1,14 +1,30 @@
 chrome.storage.sync.get(null, function(data) {
-    if(data) {
-        const { maxBudget, maxDailySpend, dailySpend, dryRun, monitoringStatus } = data;
-        document.getElementById('maxBudget').value = maxBudget;
-        document.getElementById('maxDailySpend').value = maxDailySpend;
-        document.getElementById('maxDailySpend').value = maxDailySpend;
-        document.getElementById('dryRun').checked = dryRun;
-        document.getElementById('status').innerText = monitoringStatus;
-        document.getElementById('toggleButton').innerText = monitoringStatus === 'Active' ? 'Deactivate' : 'Activate';
-    }
+  if(data) {
+      const { maxBudget, maxDailySpend, dailySpend, dryRun, monitoringStatus } = data;
+      
+      if (typeof maxBudget !== 'undefined') {
+          document.getElementById('maxBudget').value = maxBudget;
+      }
+
+      if (typeof maxDailySpend !== 'undefined') {
+          document.getElementById('maxDailySpend').value = maxDailySpend;
+      }
+
+      if (typeof dailySpend !== 'undefined') {
+          document.getElementById('dailySpend').value = dailySpend;
+      }
+
+      if (typeof dryRun !== 'undefined') {
+          document.getElementById('dryRun').checked = dryRun;
+      }
+
+      if (typeof monitoringStatus !== 'undefined') {
+          document.getElementById('status').innerText = monitoringStatus;
+          document.getElementById('toggleButton').innerText = monitoringStatus === 'Active' ? 'Deactivate' : 'Activate';
+      }
+  }
 });
+
 
 document.getElementById('saveConfig').addEventListener('click', () => {
     const maxBudget = document.getElementById('maxBudget').value;
