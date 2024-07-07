@@ -2,23 +2,18 @@ chrome.storage.sync.get(null, function(data) {
   if(data) {
       const { maxBudget, maxDailySpend, dailySpend, dryRun, monitoringStatus } = data;
       
-      if (typeof maxBudget !== 'undefined') {
+      if (typeof maxBudget !== 'undefined' && maxBudget !== null) {
           document.getElementById('maxBudget').value = maxBudget;
       }
 
-      if (typeof maxDailySpend !== 'undefined') {
+      if (typeof maxDailySpend !== 'undefined' && maxDailySpend !== null) {
           document.getElementById('maxDailySpend').value = maxDailySpend;
       }
-
-      if (typeof dailySpend !== 'undefined') {
-          document.getElementById('dailySpend').value = dailySpend;
-      }
-
-      if (typeof dryRun !== 'undefined') {
+      if (typeof dryRun !== 'undefined' && dryRun !== null) {
           document.getElementById('dryRun').checked = dryRun;
       }
 
-      if (typeof monitoringStatus !== 'undefined') {
+      if (typeof monitoringStatus !== 'undefined' && monitoringStatus !== null) {
           document.getElementById('status').innerText = monitoringStatus;
           document.getElementById('toggleButton').innerText = monitoringStatus === 'Active' ? 'Deactivate' : 'Activate';
       }

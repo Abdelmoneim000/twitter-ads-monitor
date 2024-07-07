@@ -21,7 +21,10 @@ function checkForExhausted() {
 
 // Function to remove the compaign ID after saving
 function removeCampaignId() {
-    getElementByXPath("/html/body/div[2]/div/div[1]/div/div[1]/div/div[2]/div[1]/span[2]/button/span").click();
+    const close = getElementByXPath("/html/body/div[2]/div/div[1]/div/div[1]/div/div[2]/div[1]/span[2]/button/span");
+    if(close) {
+        close.click();
+    }
 }
 
 // Function to check for the form and update the budget
@@ -37,6 +40,7 @@ function checkForForm(maxBudget, maxDailySpend, dailySpend, dryRun) {
         
         // Get saved configuration settings
             let newValue = JSON.stringify(parseFloat(element.value) + 0.01);
+            console.log(element.value, newValue);
 
             // Check if the new daily spend exceeds the max daily spend
             if (dailySpend + 0.01 > maxDailySpend) {
@@ -46,10 +50,11 @@ function checkForForm(maxBudget, maxDailySpend, dailySpend, dryRun) {
 
             if (newValue <= maxBudget) {
                 element.dispatchEvent(new Event('input', { bubbles: true })); // Trigger any attached event listeners
-                
+
                 // Update daily spend
                 chrome.storage.sync.set({ dailySpend: dailySpend + 0.01 });
                 chrome.storage.sync.get(null, function(data) {console.log(data)});
+                getElementByXPath("/html/body/div[2]/div/main/div/div/div/div/section/div/div[2]/div/div[5]/fieldset/div/div/div[2]/input").value = newValue;
 
                 // Click the "Save" button
                 const buttons = document.querySelectorAll('button.Button');
